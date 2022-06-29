@@ -47,3 +47,46 @@ export const get: RequestHandler = async () => {
 		body: { tweets }
 	}
 }
+
+// ...
+
+export const post: RequestHandler = async ({ request }) => {
+	const form = await request.formData()
+	const tweet = String(form.get('tweet'))
+
+	// you should probably use a validation library
+	if (tweet.length > 140) {
+		return {
+			status: 400,
+			body: 'Maximum Tweet length exceeded.',
+			headers: { location: '/home' }
+		}
+	}
+
+	// the user id is hardcoded but you can get it from a session
+	await prisma.tweet.create({
+		data: {
+			posted: new Date(),
+			url: Math.random().toString(16).slice(2),
+			content: tweet,
+			likes: 0,
+			user: { connect: { id: 1 } }
+		}
+	})
+
+	return {}
+}
+
+// ...
+
+export const del: RequestHandler = async ({ request }) => {
+	const form = await request.formData()
+	const tweetId = +form.get('id')
+
+	await prisma.tweet.delete({ where: { id: tweetId } })
+
+	return {
+		status: 303,
+		headers: { location: '/home' }
+	}
+}
