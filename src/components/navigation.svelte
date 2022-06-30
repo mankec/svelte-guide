@@ -14,28 +14,28 @@
 				</li>
 
 				<li class:active={path === '/home'}>
-					<a href="/home">
+					<a href="/home" sveltekit:prefetch>
 						<Icon width="32" height="32" name="home" />
 						<span>Home</span>
 					</a>
 				</li>
 
 				<li class:active={path === '/home/profile/matia'}>
-					<a href="/home/profile/matia">
+					<a href="/home/profile/matia" sveltekit:prefetch>
 						<Icon width="32" height="32" name="profile" />
 						<span>Profile</span>
 					</a>
 				</li>
 
 				<li class:active={path === '/home/settings'}>
-					<a href="/home/settings">
+					<a href="/home/settings" sveltekit:prefetch>
 						<Icon width="32" height="32" name="settings" />
 						<span>Settings</span>
 					</a>
 				</li>
 
 				<li class:active={path === '/home/about'}>
-					<a href="/home/about">
+					<a href="/home/about" sveltekit:prefetch>
 						<Icon width="32" height="32" name="about" />
 						<span>About</span>
 					</a>
